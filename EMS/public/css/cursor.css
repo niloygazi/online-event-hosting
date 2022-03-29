@@ -1,0 +1,11 @@
+body{
+    cursor: url("../images/cursor/select.cur"), default;
+}
+
+.btn, a, button{
+    cursor: url("../images/cursor/linkv2.cur"), default;
+}
+
+input{
+    cursor: url("../images/cursor/input.cur"), default;
+}

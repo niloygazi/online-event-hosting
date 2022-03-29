@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\UserHostModel;
+
+class RegistrationController extends Controller
+{
+    function RegistrationPage()
+    {
+        return view('registration');
+    }
+    
+    function UserRegistration(Request $request)
+    {
+        $member_type = $request->input('member_type');
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $mobileNo = $request->input('mobileNo');
+        $address = $request->input('address');
+        $password = $request->input('password');
+
+        $hash_password = hash('md5',$password);
+
+        $checkPhoneNo = UserHostModel::where('phone_number',$mobileNo)->count();
+        $checkEmail = UserHostModel::where('email',$email)->count();
+
+        if($checkPhoneNo >= 1 || $checkEmail >= 1)
+        {
+            return 2;
+        }
+        else
+        {
+            $status = UserHostModel::insert([
+                'name'=>$name,
+                'phone_number'=>$mobileNo,
+                'email'=>$email,
+                'address'=>$address,
+                'password'=>$hash_password,
+                'user_type'=> $member_type
+            ]);
+    
+            if($status == true)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+}
