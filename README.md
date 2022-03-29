@@ -1,2 +1,2 @@
-# Event-Management-Laravel
- Event-Management-Laravel
+# Event-Hosting-Laravel
+ Event-Hosting-Laravel
